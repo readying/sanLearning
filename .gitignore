@@ -1,5 +1,8 @@
-/node_modules
-/test
 /.vscode
+/node_modules
+
+/test
+
 /webpack-demo/node_modules
-/webpack-demo/dist
+/webpack-demo/dist/bundle.js
+/webpack-demo/devDist/bundle.js
