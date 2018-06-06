@@ -1,8 +1,10 @@
 /.vscode
 .gitignore
-/node_modules
 
 /test
 
+# projects
 /webpack-demo/node_modules
 /webpack-demo/devDist/bundle.js
+
+/webpack-demo.1/node_modules
