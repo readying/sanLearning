@@ -1,5 +1,8 @@
 import san, { DataTypes } from 'san';
 import $ from 'jquery';
+import './style.css';
+
+
 // const bootstrap = require('bootstrap');
 
 var MyApp = san.defineComponent({
@@ -29,11 +32,18 @@ var MyApp3 = san.defineComponent({
         '</div>' +
         '<div>' +
         '信息: ' + '<button class="btn btn-default" on-click="resetData()">移除信息</button>' + '<br/>' +
-        '姓名:' + '<span class="flex-1">{{name| upper}}!</span>' +
-        '年龄: {{age | upper}}!' +
-        '简介: {{info| upper}}!' +
+        '<p>姓名:' + '<span class="text">{{name| upper}}</span></p>' +
+        '<p>年龄: <span class="text">{{age | upper}}</span></p>' +
+        '<p>简介: <span class="text">{{info| upper}}</span> </p>' +
         '</div>' +
         '</div>',
+    initData: function() {
+        return {
+            name: '',
+            age: 0,
+            info: ''
+        };
+    },
     resetData: function() {
         this.data.set('name', '');
         this.data.set('age', '');
