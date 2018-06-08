@@ -1,0 +1,45 @@
+<template>
+    <div>
+        <div class="form-inline"> 
+            <input class="form-control"  type="text" value="{= person.name =}" placeholder="姓名(string)">
+            <input class="form-control" type="number" value="{= person.age  =}" placeholder="年龄(number)" on-input="setAge">
+            <input class="form-control" value="{= person.info =}" placeholder="简介(string)">
+        </div>
+       
+        <div>
+            信息: <button class="btn btn-default" on-click="clearPerson()">移除信息</button>
+            <p>姓名:<span class="text">{{person.name| upper}}</span></p>
+            <p>年龄: <span class="text">{{person.age | upper}}</span></p>
+            <p>简介: <span class="text">{{person.info| upper}}</span> </p>
+        </div>
+    </div>
+</template>
+<script>
+    import san, { DataTypes } from 'san';
+    import './style.css';
+
+    export default {
+        initData(){
+            return{
+                person:{
+                    name: undefined,
+                    age: undefined,
+                    info: undefined
+                }
+            };
+        },
+        dataTypes:{
+            person: DataTypes.shape({
+                name: DataTypes.string,
+                age: DataTypes.number,
+                info: DataTypes.string
+            })
+        },
+        clearPerson(){
+            this.data.set('person', undefined);
+        },
+        setAge: function(){
+            this.data.set("person.age", isNaN(parseInt(this.data.get('person.age')))? undefined : parseInt(this.data.get('person.age')));
+        }
+    }
+</script>
