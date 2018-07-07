@@ -1,0 +1,33 @@
+{
+    "name": "condsan",
+    "version": "1.0.0",
+    "description": "condition learn",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev-server": "webpack-dev-server "
+    },
+    "keywords": [
+        "if"
+    ],
+    "author": "cx",
+    "license": "ISC",
+    "devDependencies": {
+        "clean-webpack-plugin": "^0.1.19",
+        "css-loader": "^0.28.11",
+        "html-loader": "^0.5.5",
+        "html-webpack-plugin": "^3.2.0",
+        "san-loader": "^0.0.7",
+        "style-loader": "^0.21.0",
+        "webpack": "^4.11.1",
+        "webpack-cli": "^3.0.2",
+        "webpack-dev-server": "^3.1.4"
+    },
+    "dependencies": {
+        "bootstrap": "^4.1.1",
+        "jquery": "^3.3.1",
+        "san": "^3.6.0",
+        "san-loader": "^0.0.7",
+        "san-router": "^1.2.0"
+    }
+}

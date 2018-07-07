@@ -1,0 +1,100 @@
+<template>
+    <div>
+        <div class="form-inline"> 
+            <input class="form-control"  type="text" value="{= person.name =}" placeholder="姓名(string)">
+            <input class="form-control" type="number" value="{= person.age  =}" placeholder="年龄(number)" on-input="setAge">
+            <input class="form-control" value="{= person.info =}" placeholder="简介(string)">
+        </div>
+       
+        <div>
+            信息: <button class="btn btn-default" on-click="clearPerson()">移除信息</button>
+            <p>姓名:<span class="text">{{person.name| upper}}</span></p>
+            <p>年龄: <span class="text">{{person.age | upper}}</span></p>
+            <p>简介: <span class="text">{{person.info| upper}}</span> </p>
+        </div>
+
+        <button class="btn btn-primary" on-click="addPerson()"> Add </button>
+
+        <table class="table">
+            <tr >
+                <th>Name</th>
+                <th>State</th>
+                <th>Operation</th>
+            </tr>
+            <tr s-for = "p, index in persons">
+                <td>{{p.name}}</td>
+                <td>
+                    <span s-if="p.state === 0">to be check</span>
+                    <span s-if="p.state === 1">ok</span>
+                    <span s-if="p.state === 2">not ok</span>
+                </td>
+                <td>
+                    <button class="btn" s-if="p.state" on-click="deletePerson(index)">delete</button>
+                    <button class="btn" s-if="!p.state" on-click="checkPerson(index)">check</button>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+</template>
+<script>
+    import san, { DataTypes } from 'san';
+    import './style.css';
+
+    export default {
+        initData(){
+            return{
+                person:{
+                    name: undefined,
+                    age: undefined,
+                    info: undefined
+                },
+                persons:[
+                    {
+                        name: 'cx',
+                        state: 0
+                    },
+                    {
+                        name: 'zhangsan',
+                        state: 1
+                    },
+                    {
+                        name: 'xiaobai',
+                        state: 2
+                    }
+                ]
+            };
+        },
+        dataTypes:{
+            person: DataTypes.shape({
+                name: DataTypes.string,
+                age: DataTypes.number,
+                info: DataTypes.string
+            })
+        },
+        clearPerson(){
+            this.data.set('person', undefined);
+        },
+        setAge: function(){
+            this.data.set("person.age", isNaN(parseInt(this.data.get('person.age')))? undefined : parseInt(this.data.get('person.age')));
+        },
+        addPerson: function(){
+            this.data.push('persons',
+                {
+                    name: 'xx',
+                    state: 0
+                }
+            )
+        },
+        checkPerson:function(index){
+            this.data.set('persons['+ index +']',{
+                name: this.data.raw.persons[index].name,
+                state:1
+            });
+            // console.log('persons[index]' + this.data.persons[index]);
+        },
+        deletePerson:function(index){
+            this.data.removeAt('persons', index);
+        }
+    }
+</script>
