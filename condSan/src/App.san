@@ -35,6 +35,13 @@
             </tr>
             
         </table>
+
+        <hr/>
+        <button on-click="toggle">button</button>
+        <div id="block" class="{{isHidden? 'square-red': 'square-yellow'}}">
+        </div>
+        <div id="block2" style="width:100px; height:100px; background:{{color}}">
+        </div>
     </div>
 </template>
 <script>
@@ -44,6 +51,7 @@
     export default {
         initData(){
             return{
+                color: 'red',
                 person:{
                     name: undefined,
                     age: undefined,
@@ -66,6 +74,7 @@
             };
         },
         dataTypes:{
+            color: DataTypes.string,
             person: DataTypes.shape({
                 name: DataTypes.string,
                 age: DataTypes.number,
@@ -87,14 +96,18 @@
             )
         },
         checkPerson:function(index){
-            this.data.set('persons['+ index +']',{
-                name: this.data.raw.persons[index].name,
-                state:1
-            });
+            // this.data.set('persons[${index}].state', '1' );
+            this.data.set(`persons[${index}].name`, '1' );
             // console.log('persons[index]' + this.data.persons[index]);
         },
         deletePerson:function(index){
             this.data.removeAt('persons', index);
+        },
+        toggle: function(){
+            var isHidden = this.data.get('isHidden');
+            this.data.set('isHidden', !isHidden);
+            var bgColor = this.data.get('color');
+            this.data.set('color', bgColor ==='red'? 'yellow':'red');
         }
     }
 </script>
